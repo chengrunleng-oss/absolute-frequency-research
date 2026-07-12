@@ -217,22 +217,166 @@ Figure 2 同时画了两种不同的“流”：
 
 本地 SDR 是连续实时测量；PPP 使用本地和远端 GNSS 文件事后处理；Circular T 也是事后发布。GPS/PPP 并未直接比较 Lu+ 与 TAI，而是先比较 HM 与 UTC(USNO)。
 
+**Figure 2 的最小公式卡片**
+
+本地光频梳一侧首先使用
+
+$$
+\nu_L=n f_r+f_o\pm f_{\mathrm{beat}}\pm f_{\mathrm{offsets}},
+$$
+
+再由论文式 (3) 把各段平均频率比接到 SI 秒：
+
+$$
+\frac{f_{\mathrm{Lu}}}{f_{\mathrm{SI}}}
+=
+\frac{f_{\mathrm{Lu},T_1}}{f_{\mathrm{HM},T_1}}
+\frac{f_{\mathrm{HM},T_1}}{f_{\mathrm{HM},T_2}}
+\frac{f_{\mathrm{HM},T_2}}{f_{\mathrm{UTC(USNO)},T_2}}
+\frac{f_{\mathrm{UTC(USNO)},T_2}}{f_{\mathrm{TAI},T_2}}
+\frac{f_{\mathrm{TAI},T_2}}{f_{\mathrm{TAI},T_3}}
+\frac{f_{\mathrm{TAI},T_3}}{f_{\mathrm{SI},T_3}}.
+$$
+
+`【论文原式】` Eq. (3)，PDF 第 4 页。$T_1$ 是 Lu uptime 集合，$T_2$ 是完整 5 天窗口，$T_3$ 是 Circular T 月度窗口；逐项推导见第 10.3 节。
+
+Figure 2 的 UTC(USNO)-TAI 卫星链路不确定度使用
+
+$$
+u(\tau)=\frac{\sqrt2\,u_A}{\tau_0}
+\left(\frac{\tau}{\tau_0}\right)^{-0.9}.
+$$
+
+`【论文原式】` Eq. (4)，PDF 第 7 页；$u_A=0.2\ \mathrm{ns}$、$\tau_0=5\ \mathrm{d}$，详细传播见第 10.6 节。
+
 **这张图回答的问题**：一个本地、间歇运行的光钟如何最终得到 SI 可溯源的 Hz 数值。
 
 **对应内容**：第 8 节光频梳方程、第 10 节论文式 (3) 和式 (4)。
 
 **不要这样读**：图中的箭头不是都代表实时锁定；特别是 TAI 不是实验室里可以直接接线的一台钟。
 
-## 5. 公式总览
+## 5. 公式速查：先看公式，再看推导
 
-| 公式 | 论文位置 | 作用 | 来源标注 | 需要的背景 |
-| --- | --- | --- | --- | --- |
-| 式 (1) 超精细平均 | Eq. (1)，PDF 第 2 页，Figure 1 | 定义 Lu 标准频率 | `【论文给出】` + `【由图推出】` | 能级频差、相位累积 |
-| 式 (2) 量子投影噪声稳定度 | Eq. (2)，PDF 第 3 页 | 估算光钟运行时统计稳定度 | `【论文给出】` | Ramsey 对比度、独立采样平均 |
-| 式 (3) SI 溯源链 | Eq. (3)，PDF 第 4 页，Figure 2 | 把 Lu/HM、PPP、TAI、SI 各段相乘 | `【论文给出】` + `【基础补充】` | 频率比望远镜相消、时间窗口 |
-| 式 (4) 卫星链路不确定度 | Eq. (4)，PDF 第 7 页 | 把时间传递时间差不确定度换成 5 天频率不确定度 | `【论文给出】` + `【由上式代入】` | 端点协方差、量纲换算 |
+本节直接展示公式本体。来源标签含义如下：
 
-后文还会推导二阶塞曼、引力红移、hyper-Ramsey 剩余光移、相位到频率、加权平均和约化卡方。
+- `【论文原式】`：论文直接编号或原样写出的公式。
+- `【论文定量模型】`：论文正文给出的未编号幂律或噪声模型。
+- `【解读展开】`：把论文的文字模型显式写成代数式。
+- `【基础公式】`：理解论文所需、但不是论文新提出的数学关系。
+- `【数值代入】`：用论文参数得到的结果。
+
+### 5.1 Eq. (1)：超精细平均频率
+
+$$
+f_{\mathrm{Lu}}
+=\frac{\nu_8+\nu_7+\nu_6}{3}
+=\nu_L+\frac{2f_1+f_2}{3}.
+$$
+
+`【论文原式】` Eq. (1)，PDF 第 2 页。$\nu_{6,7,8}$ 是三条光学跃迁频率，$\nu_L$ 是 `848 nm` 探测光频率，$f_1,f_2$ 是两路微波频率。它定义 Lu 标准频率，并进入 Figure 1 的询问序列；详细推导见第 6.4 节。
+
+### 5.2 Eq. (2)：光钟运行时的投影噪声稳定度
+
+$$
+\sigma_y(\tau)=
+\frac{1}{f_{\mathrm{Lu}}}
+\frac{1}{2\pi C T_R\sqrt{2N}}
+\sqrt{\frac{t_u}{\tau}}
+\approx
+\frac{3.9\times10^{-15}}{\sqrt{\tau/\mathrm{s}}},
+\qquad \tau\gg t_u.
+$$
+
+`【论文原式】` Eq. (2)，PDF 第 3 页。$C\approx0.75$ 是 Ramsey fringe 对比度，$T_R=42\ \mathrm{ms}$，$N=25$ 是每次伺服更新的 cycle 数，$t_u=3.6\ \mathrm{s}$，$\tau$ 是平均时间。它生成 Table 2 的 `Lu clock` 统计项；详细解释见第 7.1 节。
+
+### 5.3 Eq. (3)：Lu 到 SI 的完整频率比链
+
+$$
+\frac{f_{\mathrm{Lu}}}{f_{\mathrm{SI}}}
+=
+\frac{f_{\mathrm{Lu},T_1}}{f_{\mathrm{HM},T_1}}
+\frac{f_{\mathrm{HM},T_1}}{f_{\mathrm{HM},T_2}}
+\frac{f_{\mathrm{HM},T_2}}{f_{\mathrm{UTC(USNO)},T_2}}
+\frac{f_{\mathrm{UTC(USNO)},T_2}}{f_{\mathrm{TAI},T_2}}
+\frac{f_{\mathrm{TAI},T_2}}{f_{\mathrm{TAI},T_3}}
+\frac{f_{\mathrm{TAI},T_3}}{f_{\mathrm{SI},T_3}}.
+$$
+
+`【论文原式】` Eq. (3)，PDF 第 4 页。$T_1$ 是 Lu 实际 uptime 集合，$T_2$ 是完整 5 天窗口，$T_3$ 是 Circular T 月度窗口；$f_{A,T}$ 是 A 在集合 T 上的平均频率。它是 Figure 2 的数学主线；详细解释见第 10.2-10.5 节。
+
+### 5.4 Eq. (4)：卫星链路频率传递不确定度
+
+$$
+u(\tau)=
+\frac{\sqrt2\,u_A}{\tau_0}
+\left(\frac{\tau}{\tau_0}\right)^{-0.9}.
+$$
+
+`【论文原式】` Eq. (4)，PDF 第 7 页。$u_A=0.2\ \mathrm{ns}$，$\tau_0=5\ \mathrm{d}$，本实验 $\tau=5\ \mathrm{d}$，所以
+
+$$
+u=\frac{\sqrt2\times0.2\times10^{-9}}{432000}
+=6.55\times10^{-16}.
+$$
+
+`【数值代入】` 该值对应 Table 2 的 `UTC(USNO)/TAI = 6.6e-16`；协方差传播和 `-0.9` 的来源见第 10.6 节。
+
+### 5.5 关键未编号模型
+
+光学角频率、微波角频率和询问时间：
+
+$$
+\nu_L=\frac{\omega_L}{2\pi},\qquad
+f_k=\frac{\omega_k}{2\pi},\qquad
+T_R=3(T+\tau_1+\tau_2)=42\ \mathrm{ms}.
+$$
+
+`【论文定量模型】` 详细参数见第 6.2-6.3 节。
+
+PPP/HM 长时间稳定度在到达噪声底前满足
+
+$$
+\sigma_{y,\mathrm{PPP}}(\tau)
+\approx4.6\times10^{-15}
+\left(\frac{\tau}{\mathrm{day}}\right)^{-0.75},
+$$
+
+约 5 天后达到
+
+$$
+\sigma_{y,\mathrm{floor}}\approx1.3\times10^{-15}.
+$$
+
+`【论文定量模型】` 这解释 Figure 3 的橙点；详见第 9.1 节。
+
+HM 的二次频率漂移可显式写成
+
+$$
+y_{\mathrm{HM}}(t)
+=a_0+a_1(t-t_0)+a_2(t-t_0)^2.
+$$
+
+`【解读展开】` $a_0$、$a_1$、$a_2$ 分别对应 offset、linear drift 和 aging 引起的曲率；论文只用文字说明 quadratic model，详见第 12.1 节。
+
+TAI/EAL 插值使用三种稳定度分量：
+
+$$
+\sigma_{y,\mathrm{TAI}}^{\mathrm{WFM}}(\tau)
+=1.4\times10^{-15}\left(\frac{\tau}{\mathrm{s}}\right)^{-1/2},
+$$
+
+$$
+\sigma_{y,\mathrm{TAI}}^{\mathrm{FFM}}(\tau)=2\times10^{-16},
+$$
+
+$$
+\sigma_{y,\mathrm{TAI}}^{\mathrm{RWFM}}(\tau)
+=2\times10^{-17}\left(\frac{\tau}{\mathrm{s}}\right)^{1/2}.
+$$
+
+`【论文定量模型】` 三式分别是白频率、闪烁频率和随机游走频率噪声；它们进入 Table 3 的 `TAI interpolation`，详见第 14.2 节。
+
+其他可复制公式包括 hyper-Ramsey 剩余光移（第 7.2 节）、相位到频率（第 3.2.4 节）、引力红移和二阶 Zeeman shift（第 11 节）、不确定度合成和加权平均（第 3.3 节）。
 
 ## 6. Lu+ 光钟如何定义：Figure 1 与论文式 (1)
 
@@ -453,6 +597,23 @@ $$
 - 红线分别表示白相位噪声、白频率噪声、闪烁频率噪声和额外 `plateau` 分量。
 - $\tau^{-1}$ 斜率对应白相位噪声；$\tau^{-1/2}$ 对应白频率噪声；约 $1.3\times10^{-15}$ 的水平底对应闪烁频率噪声。
 - `5-60 min` 的平台不能只用简单幂律噪声解释，作者用低通白频率噪声构造额外 plateau。
+
+`【论文定量模型】` Figure 3 的橙色 PPP/HM 数据在到达长期噪声底前近似满足
+
+$$
+\sigma_{y,\mathrm{PPP}}(\tau)
+\approx
+4.6\times10^{-15}
+\left(\frac{\tau}{\mathrm{day}}\right)^{-0.75},
+$$
+
+约 5 天后达到
+
+$$
+\sigma_{y,\mathrm{floor}}\approx1.3\times10^{-15}.
+$$
+
+$\tau$ 是平均时间。指数 `-0.75` 是本次 HM/PPP 观测的经验缩放，不是所有 PPP 链路的普适指数；到达 HM 闪烁频率噪声底后，继续平均不再按这条幂律下降。它也不同于 Eq. (4) 中用于推荐卫星链路**不确定度**缩放的 `-0.9`。
 
 论文用于模拟的三项显式幂律幅度为
 
@@ -718,6 +879,28 @@ $$
 
 只用直线不能完全描述 80 天 HM 漂移，因此论文加入二次项。
 
+`【解读展开】` 把论文所说的 quadratic frequency model 写成显式形式：
+
+$$
+y_{\mathrm{HM}}(t)
+=a_0+a_1(t-t_0)+a_2(t-t_0)^2.
+$$
+
+- $a_0$：参考时刻 $t_0$ 的 frequency offset。
+- $a_1$：$t_0$ 附近的 linear drift；论文报告约 $-3.7\times10^{-15}/\mathrm{d}$。
+- $a_2$：drift rate 随时间变化产生的曲率，不应直接与带 `per year` 单位的 aging 数值画等号。
+
+若把论文的 aging $A=4.6\times10^{-15}/\mathrm{d}/\mathrm{year}$ 理解为 drift rate 每年变化 $A$，并令 $t-t_0$ 的单位为天，则
+
+$$
+\frac{d^2y_{\mathrm{HM}}}{dt^2}
+=\frac{A}{365.25},\qquad
+a_2=\frac{A}{2\times365.25}
+\approx6.3\times10^{-18}/\mathrm{d}^2.
+$$
+
+`【合理推断】` 这是单位一致的参数映射示例，不是论文直接公布的拟合系数；作者未给出 $t_0$、$a_0$、$a_1$、$a_2$ 的完整数值表。
+
 ### 12.2 Figure 4(b)：扣除拟合模型后的残差和负号
 
 黑色模型中的 frequency offset、linear drift 和 quadratic aging 一起从本地观测中扣除。橙点成为 HM-UTC(USNO) residual；蓝点被换算到光钟相对 UTC(USNO) 的组合量。
@@ -779,6 +962,16 @@ Figure 4(c) 给出 $\chi_\nu^2=0.67$、自由度 $\nu=8$。它检查 9 个 5 天
 3. 每条轨迹分别计算 $T_1$ 上平均和完整 $T_2$ 上平均。
 4. 两种平均之差的标准差就是 HM interpolation uncertainty。
 
+`【解读展开】` 对第 $k$ 条模拟轨迹，可把这一步写成
+
+$$
+\delta_k=\langle y_k\rangle_{T_1}-\langle y_k\rangle_{T_2},
+\qquad
+u_{\mathrm{HM,int}}=\operatorname{std}_k(\delta_k).
+$$
+
+$T_1$ 是真实 Lu uptime mask，$T_2$ 是完整 5 天窗口。该式把 Figure 3 的 HM 噪声模型直接连接到 Figure 5 和 Table 2 的 `HM interpolation` 行。
+
 ![Figure 5：五天窗口中光钟 uptime 比例与 HM 插值不确定度的关系](assets/paper_figures/figure_5.png)
 
 **来源**：原论文 Figure 5，PDF 第 7 页。中文图题：光钟 dead time 分布对 HM 插值不确定度的影响。
@@ -806,6 +999,8 @@ Figure 4(c) 给出 $\chi_\nu^2=0.67$、自由度 $\nu=8$。它检查 9 个 5 天
 
 **来源**：原论文 Table 2，PDF 第 8 页。所有不确定度单位为 $10^{-16}$。
 
+本表的公式来源可直接回指：`Lu clock` 来自 Eq. (2)（第 5.2、7.1 节），`HM interpolation` 来自 Figure 3/5 的 HM 噪声模型（第 9.1、13 节），`UTC(USNO)/TAI` 来自 Eq. (4)（第 5.4、10.6 节），`Total` 使用独立统计项平方和。
+
 | MJD start | 59269 | 59274 | 59284 | 59289 | 59294 | 59314 | 59324 | 59329 | 59334 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | MJD stop | 59274 | 59279 | 59289 | 59294 | 59299 | 59319 | 59329 | 59334 | 59339 |
@@ -825,7 +1020,34 @@ $$
 
 表中缺少 MJD `59279-59284`、`59299-59314`、`59319-59324` 等没有 Lu 观测的窗口；这些空窗不产生 5 天 Lu/TAI 点，却会影响月度 TAI interpolation。
 
-### 14.2 Table 3：三个 Circular T 月度估计与最终合并
+### 14.2 TAI interpolation：EAL/TAI 三分量噪声模型
+
+`【论文定量模型】` 论文第 4.5 节使用 EAL/TAI 稳定度模型评估“有 5 天 Lu/TAI 结果的时段”到完整月度窗口之间的 dead time。三种分量为
+
+$$
+\sigma_{y,\mathrm{TAI}}^{\mathrm{WFM}}(\tau)
+=1.4\times10^{-15}
+\left(\frac{\tau}{\mathrm{s}}\right)^{-1/2},
+$$
+
+$$
+\sigma_{y,\mathrm{TAI}}^{\mathrm{FFM}}(\tau)
+=2\times10^{-16},
+$$
+
+$$
+\sigma_{y,\mathrm{TAI}}^{\mathrm{RWFM}}(\tau)
+=2\times10^{-17}
+\left(\frac{\tau}{\mathrm{s}}\right)^{1/2}.
+$$
+
+$\tau$ 是平均时间；WFM、FFM、RWFM 分别是 white、flicker 和 random-walk frequency modulation。三式描述不同随机过程的稳定度幅度，不能未经噪声生成和方差规则就把三个表达式直接线性相加成一条“总偏差”。
+
+模拟方法与 HM dead-time 思路相似：生成或使用与 EAL/TAI 模型相容的频率轨迹，比较有效 5 天集合上的平均和完整 Circular T 月度窗口平均，两者差值的标准差形成 Table 3 的 `TAI interpolation`：`1.7, 2.9, 6.3`，合并后为 `1.5`（单位均为 $10^{-16}$）。
+
+**复现边界**：要严格复现这些数值，还需要每个月哪些 5 天窗口有效、噪声生成细节和相关性设置；论文只给出模型幅度和最终预算。
+
+### 14.3 Table 3：三个 Circular T 月度估计与最终合并
 
 **来源**：原论文 Table 3，PDF 第 8 页。单位为 $10^{-16}$。
 
