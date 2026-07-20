@@ -9,7 +9,7 @@ from docx.shared import Inches, Pt, RGBColor
 
 
 ROOT = Path(__file__).resolve().parent
-OUT = ROOT / "output" / "documents"
+OUT = ROOT
 FIG = ROOT / "assets" / "paper_figures"
 
 INK = "20313F"
@@ -223,6 +223,65 @@ def add_summary_table(doc):
             set_font(r, size=9.5, bold=(j == 0), color=BLUE if j == 0 else INK)
 
 
+def add_uncertainty_budget_table(doc):
+    rows = [
+        ("统计分量 u_A", "", "", "", ""),
+        ("Lu/TAI", "9.9", "13", "19", "7.3"),
+        ("TAI interpolation", "1.7", "2.9", "6.3", "1.5"),
+        ("TAI/SI", "0.7", "0.7", "0.9", "0.4"),
+        ("统计合计", "10", "13", "20", "7.4"),
+        ("系统分量 u_B", "", "", "", ""),
+        ("HM drift", "2.0", "2.0", "2.0", "2.0"),
+        ("HM diurnal", "5.0", "5.0", "5.0", "5.0"),
+        ("Lu systematics", "0.1", "0.1", "0.1", "0.1"),
+        ("Gravitational shift", "0.4", "0.4", "0.4", "0.4"),
+        ("PSFS", "0.9", "0.8", "0.9", "0.9"),
+        ("系统合计", "5.5", "5.5", "5.5", "5.5"),
+        ("Lu/SI 总不确定度", "11", "14", "20", "9.2"),
+    ]
+    headers = ("不确定度来源", "Cir. T 399", "Cir. T 400", "Cir. T 401", "合并结果")
+    table = doc.add_table(rows=1, cols=5)
+    table.autofit = False
+    widths = [2.55, 1.05, 1.05, 1.05, 1.16]
+    for j, text in enumerate(headers):
+        cell = table.cell(0, j)
+        cell.width = Inches(widths[j])
+        set_cell_shading(cell, BLUE)
+        set_cell_margins(cell, top=90, bottom=90, start=80, end=80)
+        p = cell.paragraphs[0]
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.space_after = Pt(0)
+        r = p.add_run(text)
+        set_font(r, size=8.2, bold=True, color="FFFFFF")
+    set_repeat_table_header(table.rows[0])
+
+    for label, *values in rows:
+        cells = table.add_row().cells
+        is_group = label in ("统计分量 u_A", "系统分量 u_B")
+        is_total = label in ("统计合计", "系统合计", "Lu/SI 总不确定度")
+        for j, text in enumerate((label, *values)):
+            cells[j].width = Inches(widths[j])
+            set_cell_margins(cells[j], top=65, bottom=65, start=80, end=80)
+            if is_group:
+                set_cell_shading(cells[j], LIGHT)
+            elif label == "Lu/SI 总不确定度":
+                set_cell_shading(cells[j], "DCEBED")
+            p = cells[j].paragraphs[0]
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT if j == 0 else WD_ALIGN_PARAGRAPH.CENTER
+            p.paragraph_format.space_after = Pt(0)
+            r = p.add_run(text)
+            set_font(r, size=8.2, bold=(is_group or is_total), color=BLUE if is_group else INK)
+
+
+def add_equation(doc, text):
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.space_before = Pt(3)
+    p.paragraph_format.space_after = Pt(5)
+    r = p.add_run(text)
+    set_font(r, name="Cambria Math", size=10.5, italic=True, color=INK)
+
+
 def build():
     OUT.mkdir(parents=True, exist_ok=True)
     doc = Document()
@@ -291,14 +350,37 @@ def build():
                "提高 uptime 不仅增加数据量，更重要的是减少用 HM 跨越停机区间时的外推风险。相同 uptime 下，运行片段在时间上的分布也会影响不确定度。", 5.15)
 
     doc.add_page_break()
-    doc.add_heading("七、三个月结果与最终绝对频率", level=1)
+    doc.add_heading("七、不确定度预算表及分析", level=1)
+    p = doc.add_paragraph("来源说明：下表为原论文 Table 3 的汇报版。所有数值均为相对标准不确定度，单位为 10^-16；Cir. T 399-401 是三期月度估计，合并结果按论文的相关性模型计算。")
+    add_uncertainty_budget_table(doc)
+    doc.add_heading("7.1 合成方法", level=2)
+    p = doc.add_paragraph("【基础补充】相互独立的标准不确定度分量采用方差相加，即平方和开根号。若分量相关，则还必须加入协方差项，不能直接使用下面的简式。")
+    add_equation(doc, "u_c = sqrt(sum(u_i^2))")
+    p = doc.add_paragraph("合并结果的统计分量、系统分量和总不确定度分别为：")
+    add_equation(doc, "u_A = sqrt(7.3^2 + 1.5^2 + 0.4^2) = 7.46")
+    p = doc.add_paragraph("表中的 7.3、1.5、0.4 已经舍入，因此显示值复算得到 7.46；论文使用未舍入的内部数值合成后报告为 7.4。这是显示精度差异，不是合成规则不同。")
+    add_equation(doc, "u_B = sqrt(2.0^2 + 5.0^2 + 0.1^2 + 0.4^2 + 0.9^2) = 5.5")
+    add_equation(doc, "u_Lu/SI = sqrt(7.4^2 + 5.5^2) = 9.2")
+    doc.add_heading("7.2 预算主导项", level=2)
+    add_bullets(doc, [
+        "统计侧主要由 Lu/TAI = 7.3 决定；它明显高于 TAI interpolation = 1.5 和 TAI/SI = 0.4。",
+        "系统侧主要由 HM diurnal = 5.0 决定，反映光钟运行时段偏向白天时潜在的氢钟昼夜频率偏差。",
+        "Cir. T 401 的 Lu/TAI = 19、TAI interpolation = 6.3，总不确定度达到 20，因此最终权重最低。",
+        "Lu systematics = 0.1、引力红移 = 0.4，说明当前瓶颈主要在 HM 和远程时间链路，而不是 Lu+ 跃迁本体。",
+    ])
+    doc.add_heading("7.3 相关性与改进方向", level=2)
+    p = doc.add_paragraph("HM drift、HM diurnal、Lu 系统频移、引力红移以及大部分 PSFS 系统分量在三个月中共享设备、模型或校准来源，因此不能按三个独立样本平均。统计项可随独立数据增加而下降，但合并后的系统合计仍为 5.5，而不是 5.5/sqrt(3)。")
+    add_lead_box(doc, "改进优先级", "优先提高光钟 uptime、改善 HM 昼夜效应评估和远程频率传递；单独继续降低已经很小的 Lu+ 本体系统不确定度，对最终 9.2 x 10^-16 的改善有限。")
+
+    doc.add_page_break()
+    doc.add_heading("八、三个月结果与最终绝对频率", level=1)
     p = doc.add_paragraph("九个 5 天结果按 Circular T 399、400、401 三个月度窗口合并，再结合 TAI 相对 SI 秒的校准结果。跨月共同的系统不确定度不能被当作三次独立测量而简单平均掉，作者据此处理相关项并计算最终加权均值。")
     add_figure(doc, 6, "Circular T 399-401 月度 Lu/SI 结果与最终加权均值",
                "回答“各月结果是否一致，以及最终频率是多少”。",
                "三个黑点表示各月相对加权均值的频率偏差；红色误差棒仅为统计分量，黑色误差棒为总不确定度；灰带表示最终加权结果的相对不确定度范围。第三个月总误差最大。",
-               "三个独立月度结果在不确定度范围内一致。最终得到 f_Lu = 353 638 794 073 800.35(33) Hz，相对不确定度为 9.2 x 10^-16。", 5.25)
+               "三个月度估计在不确定度范围内一致。最终得到 f_Lu = 353 638 794 073 800.35(33) Hz，相对不确定度为 9.2 x 10^-16。", 5.25)
 
-    doc.add_heading("八、总结与评价", level=1)
+    doc.add_heading("九、总结与评价", level=1)
     add_bullets(doc, [
         "主要贡献：首次给出 176Lu+ (3D1) 光频标的 SI 可溯源绝对频率，为未来形成推荐频率值提供关键实验依据。",
         "方法特点：把单离子光钟、光频梳、本地氢钟、GNSS PPP、UTC(USNO)、TAI 和 SI 秒组织成完整计量链。",
