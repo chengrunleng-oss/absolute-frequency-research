@@ -11,6 +11,7 @@
 | [`lu3d1_absolute_frequency_explained.md`](lu3d1_absolute_frequency_explained.md) | 面向初学者的完整论文解读 |
 | [`reproduction_guide.md`](reproduction_guide.md) | 数据需求、计算流程和复现边界 |
 | [`lu3d1_absolute_frequency_feedback.md`](lu3d1_absolute_frequency_feedback.md) | 解读文档的审核反馈记录 |
+| [`HM/hydrogen_maser_photos_report.md`](HM/hydrogen_maser_photos_report.md) | 氢钟设备、厂商指标、频率调节及两类拍频测试照片说明 |
 
 ## 原始论文
 
@@ -22,6 +23,7 @@
 ## 图片与可视化
 
 - `assets/paper_figures/`：从原论文提取的 Figure 1-6。
+- `HM/photos/`：VCH-1003M 氢钟设备、控制界面和比对测试照片。
 - [`visualizations/README.md`](visualizations/README.md)：不确定度对比图、交互页面、CSV 数据和生成方法。
 - [`visualizations/web/uncertainty-comparison.html`](visualizations/web/uncertainty-comparison.html)：静态可视化入口。
 - [`visualizations/web/uncertainty-comparison-interactive.html`](visualizations/web/uncertainty-comparison-interactive.html)：交互可视化入口。
