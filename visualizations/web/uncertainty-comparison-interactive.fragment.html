@@ -1,0 +1,241 @@
+<div id="lu-uncertainty-comparison-2607">
+  <style>
+    #lu-uncertainty-comparison-2607 {
+      color-scheme: light;
+      --background: #FFFFFF;
+      --foreground: #20262D;
+      --card: #F3F5F7;
+      --card-foreground: #20262D;
+      --muted-foreground: #5F6B76;
+      --border: #D9DEE5;
+      --viz-series-1: #2D6A8A;
+      --viz-series-2: #C47B28;
+      --viz-series-3: #4E8B57;
+      --viz-series-4: #A84E62;
+      --viz-series-5: #7A5AA6;
+      --viz-series-6: #318C86;
+      color: var(--foreground);
+      background: var(--background);
+      width: 100%;
+      padding: 18px;
+      font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    #lu-uncertainty-comparison-2607 * { box-sizing: border-box; }
+    #lu-uncertainty-comparison-2607 .text-small { font-size: 12px; }
+    #lu-uncertainty-comparison-2607 .uc-title { padding: 2px 0 16px; }
+    #lu-uncertainty-comparison-2607 .uc-title h1 { margin: 0; font-size: 24px; font-weight: 500; line-height: 1.35; }
+    #lu-uncertainty-comparison-2607 .uc-title p { margin: 6px 0 0; color: var(--muted-foreground); }
+    #lu-uncertainty-comparison-2607 .uc-stack { display: grid; gap: 18px; }
+    #lu-uncertainty-comparison-2607 .uc-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    #lu-uncertainty-comparison-2607 .uc-metric {
+      display: flex;
+      flex-direction: column;
+      min-height: 128px;
+      padding: 18px 20px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #F8F9FB;
+      box-shadow: 0 1px 2px rgba(32, 38, 45, 0.06);
+      justify-content: space-between;
+    }
+    #lu-uncertainty-comparison-2607 .uc-metric-label { color: var(--muted-foreground); }
+    #lu-uncertainty-comparison-2607 .uc-metric-value {
+      display: flex;
+      align-items: baseline;
+      gap: 7px;
+      color: var(--foreground);
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+    #lu-uncertainty-comparison-2607 .uc-metric-unit { font-size: 17px; font-weight: 400; }
+    #lu-uncertainty-comparison-2607 .uc-metric-context { color: var(--muted-foreground); }
+    #lu-uncertainty-comparison-2607 .uc-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    #lu-uncertainty-comparison-2607 .uc-section { min-width: 0; }
+    #lu-uncertainty-comparison-2607 .uc-section > h3 { margin: 0 0 10px; font-weight: 500; }
+    #lu-uncertainty-comparison-2607 .uc-chart { position: relative; width: 100%; height: 310px; }
+    #lu-uncertainty-comparison-2607 .uc-chart.uc-tall { height: 410px; }
+    #lu-uncertainty-comparison-2607 .uc-chart.uc-short { height: 270px; }
+    #lu-uncertainty-comparison-2607 .uc-chart canvas { width: 100% !important; height: 100% !important; }
+    #lu-uncertainty-comparison-2607 .uc-legend { display: grid; gap: 6px; margin-top: 10px; }
+    #lu-uncertainty-comparison-2607 .uc-legend-row { display: grid; grid-template-columns: 12px minmax(0, 1fr) auto auto; gap: 8px; align-items: center; }
+    #lu-uncertainty-comparison-2607 .uc-swatch { width: 10px; height: 10px; border-radius: 50%; }
+    #lu-uncertainty-comparison-2607 .uc-legend-value,
+    #lu-uncertainty-comparison-2607 .uc-legend-share { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    #lu-uncertainty-comparison-2607 .uc-legend-share { color: var(--muted-foreground); }
+    #lu-uncertainty-comparison-2607 .uc-note { color: var(--muted-foreground); margin: 7px 0 0; }
+    #lu-uncertainty-comparison-2607 .uc-formulas { display: grid; gap: 10px; }
+    #lu-uncertainty-comparison-2607 .uc-formula { padding: 10px 0; border-bottom: 1px solid var(--border); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+    #lu-uncertainty-comparison-2607 .uc-formula:last-child { border-bottom: 0; }
+    #lu-uncertainty-comparison-2607 .uc-formula code { white-space: normal; }
+    #lu-uncertainty-comparison-2607 .uc-step { display: grid; grid-template-columns: minmax(95px, .45fr) minmax(0, 1.55fr); gap: 10px; }
+    #lu-uncertainty-comparison-2607 .uc-step-label { color: var(--muted-foreground); }
+    #lu-uncertainty-comparison-2607 .uc-data { display: grid; gap: 5px; }
+    #lu-uncertainty-comparison-2607 .uc-data-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--border); }
+    #lu-uncertainty-comparison-2607 .uc-data-row:last-child { border-bottom: 0; }
+    #lu-uncertainty-comparison-2607 .uc-data-number { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    #lu-uncertainty-comparison-2607 .uc-data-share { color: var(--muted-foreground); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    #lu-uncertainty-comparison-2607 .uc-emphasis { font-weight: 500; }
+    #lu-uncertainty-comparison-2607 .uc-source { display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--muted-foreground); }
+    @media (max-width: 760px) {
+      #lu-uncertainty-comparison-2607 .uc-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #lu-uncertainty-comparison-2607 .uc-two { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 440px) {
+      #lu-uncertainty-comparison-2607 .uc-metrics { grid-template-columns: 1fr; }
+      #lu-uncertainty-comparison-2607 .uc-metric { min-height: 116px; }
+      #lu-uncertainty-comparison-2607 .uc-chart { height: 290px; }
+      #lu-uncertainty-comparison-2607 .uc-chart.uc-tall { height: 470px; }
+      #lu-uncertainty-comparison-2607 .uc-legend-row { grid-template-columns: 12px minmax(0, 1fr) auto; }
+      #lu-uncertainty-comparison-2607 .uc-legend-share { grid-column: 2 / 4; }
+      #lu-uncertainty-comparison-2607 .uc-step { grid-template-columns: 1fr; gap: 3px; }
+      #lu-uncertainty-comparison-2607 .uc-data-row { grid-template-columns: minmax(0, 1fr) auto; }
+      #lu-uncertainty-comparison-2607 .uc-data-share { grid-column: 1 / 3; }
+    }
+  </style>
+
+  <header class="uc-title">
+    <h1>镥离子 848 nm 绝对频率测量不确定度对比</h1>
+    <p>2025 年 TAI 溯源结果与 2026 年 PPP-AR 直比结果</p>
+  </header>
+
+  <div class="uc-stack">
+    <div class="viz-grid uc-metrics" aria-label="核心结果">
+      <div class="card viz-stat uc-metric"><div class="uc-metric-label">前篇总不确定度</div><div class="uc-metric-value"><span>9.2</span><span class="uc-metric-unit">× 10<sup>−16</sup></span></div><div class="uc-metric-context text-small">TAI 链路 · 2025</div></div>
+      <div class="card viz-stat uc-metric"><div class="uc-metric-label">后篇总不确定度</div><div class="uc-metric-value"><span>2.57</span><span class="uc-metric-unit">× 10<sup>−16</sup></span></div><div class="uc-metric-context text-small">PPP-AR 直比 NRC-FCs2 · 2026</div></div>
+      <div class="card viz-stat uc-metric"><div class="uc-metric-label">不确定度改善</div><div class="uc-metric-value"><span>3.58</span><span class="uc-metric-unit">倍</span></div><div class="uc-metric-context text-small">9.2 ÷ 2.57</div></div>
+      <div class="card viz-stat uc-metric"><div class="uc-metric-label">总方差降低</div><div class="uc-metric-value"><span>92.3%</span></div><div class="uc-metric-context text-small">1 − (2.57 ÷ 9.2)²</div></div>
+    </div>
+
+    <div class="uc-two">
+      <section class="uc-section" aria-labelledby="uc-old-pie-title"><h3 id="uc-old-pie-title">前篇：各项方差占比</h3><div class="uc-chart"><canvas id="uc-old-pie" role="img" aria-label="前篇不确定度预算的方差占比环形图"></canvas></div><div id="uc-old-legend" class="uc-legend text-small"></div></section>
+      <section class="uc-section" aria-labelledby="uc-new-pie-title"><h3 id="uc-new-pie-title">后篇：各项方差占比</h3><div class="uc-chart"><canvas id="uc-new-pie" role="img" aria-label="后篇不确定度预算的方差占比环形图"></canvas></div><div id="uc-new-legend" class="uc-legend text-small"></div></section>
+    </div>
+
+    <section class="uc-section" aria-labelledby="uc-compare-title">
+      <h3 id="uc-compare-title">关键指标同尺度比较</h3>
+      <div class="uc-chart uc-tall"><canvas id="uc-compare" role="img" aria-label="前后两篇关键不确定度指标的横向柱状对比图"></canvas></div>
+      <p class="uc-note text-small">单位均为 10<sup>−16</sup>；“远程时间链路”把前篇 HM/UTC、UTC/TAI、TAI 插值与 TAI/SI 统计项合并，后篇把 PPP-AR 与 RF 分配合并。</p>
+    </section>
+
+    <section class="uc-section" aria-labelledby="uc-share-title">
+      <h3 id="uc-share-title">总方差由谁主导：统一以前篇总方差为 100%</h3>
+      <div class="uc-chart uc-short"><canvas id="uc-share" role="img" aria-label="以前篇总方差为百分之百标尺的前后两篇功能组方差堆叠图"></canvas></div>
+      <p class="uc-note text-small">前篇总方差 85.11 定义为 100%；后篇总方差 6.58 只相当于前篇的 7.73%，不再把后篇单独归一化到 100%。</p>
+    </section>
+
+    <section class="uc-section" aria-labelledby="uc-waterfall-title">
+      <h3 id="uc-waterfall-title">各功能组的方差前后对比</h3>
+      <div class="uc-chart"><canvas id="uc-waterfall" role="img" aria-label="Lu本地、氢钟、远程链路和SI参考四个功能组的前后绝对方差对比图"></canvas></div>
+      <p class="uc-note text-small">净变化：HM −47.73，远程链路 −34.48，Lu 本地 −0.05，SI 参考 +3.73；因此 85.11 − 78.54 = 6.58。单位均为 (10<sup>−16</sup>)²。</p>
+    </section>
+
+    <section class="uc-section" aria-labelledby="uc-uptime-title">
+      <h3 id="uc-uptime-title">Lu 运行占空比与 HM 插值/外推不确定度</h3>
+      <div class="uc-chart"><canvas id="uc-uptime" role="img" aria-label="九个五日窗口和新论文十日测量的占空比与氢钟插值外推不确定度散点图"></canvas></div>
+      <p class="uc-note text-small">前篇 9 个五日窗口的 Lu uptime 为 2%–37%，对应 HM interpolation 6.8–29；后篇连续十日达到 94.2%，HM extrapolation 降至 0.74。单位：10<sup>−16</sup>。</p>
+    </section>
+
+    <div class="uc-two">
+      <section class="uc-section" aria-labelledby="uc-old-formula-title">
+        <h3 id="uc-old-formula-title">前篇完整合成公式</h3>
+        <div class="card uc-formulas">
+          <div class="uc-formula uc-step"><span class="uc-step-label">九次结果权重</span><code>a<sub>j</sub> = (1/u<sub>j</sub>²) / Σ<sub>i</sub>(1/u<sub>i</sub>²)</code></div>
+          <div class="uc-formula uc-step"><span class="uc-step-label">分量有效值</span><code>u<sub>k,eff</sub> = √[Σ<sub>j</sub>(a<sub>j</sub>u<sub>k,j</sub>)²]</code></div>
+          <div class="uc-formula uc-step"><span class="uc-step-label">Lu/TAI</span><code>√(0.124² + 4.391² + 5.292² + 2.328²) = 7.25 ≈ 7.3</code></div>
+          <div class="uc-formula uc-step"><span class="uc-step-label">统计合成</span><code>u<sub>A</sub> = √(7.253² + 1.5² + 0.4²) = 7.42 ≈ 7.4</code></div>
+          <div class="uc-formula uc-step"><span class="uc-step-label">系统合成</span><code>u<sub>B</sub> = √(2.0² + 5.0² + 0.1² + 0.4² + 0.9²) = 5.48 ≈ 5.5</code></div>
+          <div class="uc-formula uc-step uc-emphasis"><span class="uc-step-label">最终结果</span><code>u<sub>old</sub> = √(7.4² + 5.5²) = 9.22 ≈ 9.2</code></div>
+        </div>
+      </section>
+      <section class="uc-section" aria-labelledby="uc-new-formula-title">
+        <h3 id="uc-new-formula-title">后篇完整合成公式</h3>
+        <div class="card uc-formulas">
+          <div class="uc-formula uc-step"><span class="uc-step-label">统计项</span><code>u<sub>A</sub> = √(0.04² + 0.74² + 0.01² + 1.00² + 0.60² + 1.78²)</code></div>
+          <div class="uc-formula uc-step"><span class="uc-step-label">统计结果</span><code>u<sub>A</sub> = √5.0777 = 2.253；论文用未舍入数据报告 2.26</code></div>
+          <div class="uc-formula uc-step"><span class="uc-step-label">系统项</span><code>u<sub>B</sub> = √(0.36² + 1.17²) = √1.4985 = 1.224 ≈ 1.22</code></div>
+          <div class="uc-formula uc-step uc-emphasis"><span class="uc-step-label">最终结果</span><code>u<sub>new</sub> = √(2.26² + 1.22²) = 2.57 ≈ 2.6</code></div>
+          <div class="uc-formula uc-step"><span class="uc-step-label">改善倍数</span><code>u<sub>old</sub>/u<sub>new</sub> = 9.2/2.57 = 3.58</code></div>
+          <div class="uc-formula uc-step"><span class="uc-step-label">方差降幅</span><code>1 − (2.57/9.2)² = 92.3%</code></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="uc-two">
+      <section class="uc-section" aria-labelledby="uc-old-data-title"><h3 id="uc-old-data-title">前篇预算明细</h3><div id="uc-old-data" class="uc-data text-small" aria-label="前篇预算明细，单位10的负16次方"></div></section>
+      <section class="uc-section" aria-labelledby="uc-new-data-title"><h3 id="uc-new-data-title">后篇预算明细</h3><div id="uc-new-data" class="uc-data text-small" aria-label="后篇预算明细，单位10的负16次方"></div></section>
+    </div>
+
+    <div class="uc-source text-small"><span>前篇：2502.10004v3，Table 2–3</span><span>后篇：2607.07044v1，Table 4</span><span>饼图与百分比均按方差 u² 计算</span></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>
+    (() => {
+      const root = document.getElementById('lu-uncertainty-comparison-2607');
+      if (!root || typeof Chart === 'undefined') return;
+      const oldItems = [
+        {label:'Lu 统计（加权后）',u:0.124,group:0,color:'#2D6A8A'},
+        {label:'HM interpolation（加权后）',u:4.391,group:1,color:'#C47B28'},
+        {label:'HM / UTC(USNO)',u:5.292,group:2,color:'#4E8B57'},
+        {label:'UTC(USNO) / TAI',u:2.328,group:2,color:'#A84E62'},
+        {label:'TAI interpolation',u:1.50,group:2,color:'#7A5AA6'},
+        {label:'TAI / SI 统计',u:0.40,group:2,color:'#318C86'},
+        {label:'HM drift',u:2.00,group:1,color:'#C49A2D'},
+        {label:'HM diurnal',u:5.00,group:1,color:'#D06B87'},
+        {label:'Lu 系统',u:0.10,group:0,color:'#4F63A8'},
+        {label:'重力红移',u:0.40,group:0,color:'#7D8F3B'},
+        {label:'PSFS 系统',u:0.90,group:3,color:'#9A6840'}
+      ];
+      const newItems = [
+        {label:'Lu 统计',u:0.04,group:0,color:'#2D6A8A'},
+        {label:'HM extrapolation',u:0.74,group:1,color:'#C47B28'},
+        {label:'HM drift',u:0.01,group:1,color:'#C49A2D'},
+        {label:'PPP-AR 链路',u:1.00,group:2,color:'#4E8B57'},
+        {label:'NRC RF 分配',u:0.60,group:2,color:'#318C86'},
+        {label:'NRC-FCs2 统计',u:1.78,group:3,color:'#7A5AA6'},
+        {label:'Lu 系统＋重力红移',u:0.36,group:0,color:'#4F63A8'},
+        {label:'NRC-FCs2 系统',u:1.17,group:3,color:'#A84E62'}
+      ];
+      const charts=[];
+      const theme=()=>{const s=getComputedStyle(root);return{fg:s.getPropertyValue('--foreground').trim(),muted:s.getPropertyValue('--muted-foreground').trim(),border:s.getPropertyValue('--border').trim(),bg:s.getPropertyValue('--background').trim(),series:[1,2,3,4,5,6].map(i=>s.getPropertyValue('--viz-series-'+i).trim()),font:s.fontFamily};};
+      let t=theme();
+      const oldColor='#687481';
+      const newColor='#25739A';
+      const totalVariance=items=>items.reduce((sum,d)=>sum+d.u*d.u,0);
+      const fmt=value=>value.toFixed(2);
+      const groupColors=()=>[t.series[0],t.series[1],t.series[2],t.series[3]];
+      Chart.defaults.color=t.muted;Chart.defaults.borderColor=t.border;Chart.defaults.font.family=t.font;Chart.defaults.animation=false;
+
+      function buildLegend(targetId,items){
+        const target=root.querySelector('#'+targetId),total=totalVariance(items);
+        target.innerHTML=items.map(item=>'<div class="uc-legend-row"><span class="uc-swatch" style="background:'+item.color+'"></span><span>'+item.label+'</span><span class="uc-legend-value">'+fmt(item.u)+'</span><span class="uc-legend-share">'+(100*item.u*item.u/total).toFixed(1)+'%</span></div>').join('');
+      }
+      function makeDoughnut(id,items,centerText){
+        const total=totalVariance(items);
+        const centerPlugin={id:'center-'+id,afterDraw(chart){const area=chart.chartArea;if(!area)return;const ctx=chart.ctx;ctx.save();ctx.fillStyle=t.fg;ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='500 18px '+t.font;ctx.fillText(centerText,(area.left+area.right)/2,(area.top+area.bottom)/2-7);ctx.fillStyle=t.muted;ctx.font='400 12px '+t.font;ctx.fillText('× 10⁻¹⁶',(area.left+area.right)/2,(area.top+area.bottom)/2+14);ctx.restore();}};
+        charts.push(new Chart(root.querySelector('#'+id),{type:'doughnut',data:{labels:items.map(d=>d.label),datasets:[{data:items.map(d=>d.u*d.u),backgroundColor:items.map(d=>d.color),borderColor:t.bg,borderWidth:2,hoverOffset:3}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false},tooltip:{callbacks:{label(ctx){const item=items[ctx.dataIndex];return item.label+': u='+fmt(item.u)+', 方差占比='+(100*item.u*item.u/total).toFixed(1)+'%';}}}}},plugins:[centerPlugin]}));
+      }
+      makeDoughnut('uc-old-pie',oldItems,'9.22');makeDoughnut('uc-new-pie',newItems,'2.57');buildLegend('uc-old-legend',oldItems);buildLegend('uc-new-legend',newItems);
+
+      charts.push(new Chart(root.querySelector('#uc-compare'),{type:'bar',data:{labels:['总不确定度','统计不确定度','系统不确定度','HM 插值 / 外推','远程时间链路','HM drift','HM diurnal','Lu 本地系统','SI 参考系统'],datasets:[{label:'前篇',data:[9.22,7.40,5.50,4.39,5.99,2.00,5.00,0.43,0.90],backgroundColor:oldColor},{label:'后篇',data:[2.57,2.26,1.22,0.74,1.17,0.01,0.00,0.36,1.17],backgroundColor:newColor}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{beginAtZero:true,title:{display:true,text:'不确定度 u（×10⁻¹⁶）'},grid:{color:t.border}},y:{grid:{display:false}}},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:10}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.raw.toFixed(2)+' ×10⁻¹⁶'}}}}}));
+
+      const oldGroups=[0.1854027015,48.2811613544,35.8359819485,0.81],newGroups=[0.1312,0.5477,1.36,4.5373],groupLabels=['Lu 本地','HM flywheel','远程链路','SI 参考'];
+      const totals=[oldGroups.reduce((a,b)=>a+b,0),newGroups.reduce((a,b)=>a+b,0)];
+      const baselineShare=[100,100*totals[1]/totals[0]];
+      charts.push(new Chart(root.querySelector('#uc-share'),{type:'bar',data:{labels:['前篇','后篇'],datasets:groupLabels.map((label,i)=>({label,data:[100*oldGroups[i]/totals[0],100*newGroups[i]/totals[0]],backgroundColor:groupColors()[i]}))},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true,min:0,max:105,title:{display:true,text:'相对前篇总方差（前篇 = 100%）'},grid:{color:t.border},ticks:{callback:v=>v<=100?v+'%':''}},y:{stacked:true,grid:{display:false}}},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:10}},tooltip:{callbacks:{label:c=>{const variance=c.dataIndex===0?oldGroups[c.datasetIndex]:newGroups[c.datasetIndex];return c.dataset.label+': 方差 '+variance.toFixed(2)+'，相当前篇总方差 '+c.raw.toFixed(2)+'%';}}}}},plugins:[{id:'baseline-total-labels',afterDatasetsDraw(chart){const ctx=chart.ctx,last=chart.getDatasetMeta(chart.data.datasets.length-1);ctx.save();ctx.fillStyle=t.fg;ctx.textBaseline='middle';ctx.font='500 11px '+t.font;last.data.forEach((bar,i)=>{const atRight=baselineShare[i]>95;ctx.textAlign=atRight?'right':'left';ctx.fillText(baselineShare[i].toFixed(i===0?0:2)+'%',atRight?chart.chartArea.right-4:bar.x+8,bar.y);});ctx.restore();}}]}));
+
+      const varianceDeltas=newGroups.map((value,i)=>value-oldGroups[i]);
+      charts.push(new Chart(root.querySelector('#uc-waterfall'),{type:'bar',data:{labels:groupLabels,datasets:[{label:'前篇',data:oldGroups,backgroundColor:oldColor},{label:'后篇',data:newGroups,backgroundColor:newColor}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{beginAtZero:true,max:55,title:{display:true,text:'方差 u²［(10⁻¹⁶)²］'},grid:{color:t.border}},y:{grid:{display:false}}},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:10}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.raw.toFixed(2),afterBody:items=>'变化量 Δ = '+varianceDeltas[items[0].dataIndex].toFixed(2)}}}},plugins:[{id:'variance-delta-labels',afterDatasetsDraw(chart){const ctx=chart.ctx,scale=chart.scales.x;ctx.save();ctx.fillStyle=t.fg;ctx.textAlign='left';ctx.textBaseline='middle';ctx.font='500 11px '+t.font;groupLabels.forEach((label,i)=>{const y=(chart.getDatasetMeta(0).data[i].y+chart.getDatasetMeta(1).data[i].y)/2;const x=scale.getPixelForValue(Math.max(oldGroups[i],newGroups[i]))+8;const delta=varianceDeltas[i];ctx.fillText('Δ '+(delta>=0?'+':'')+delta.toFixed(2),x,y);});ctx.restore();}}]}));
+
+      const oldWindows=[{x:11,y:15},{x:2,y:29},{x:7,y:16},{x:37,y:6.8},{x:14,y:14},{x:9,y:18},{x:3,y:24},{x:30,y:7.6},{x:20,y:8.8}];
+      charts.push(new Chart(root.querySelector('#uc-uptime'),{type:'scatter',data:{datasets:[{label:'前篇：9 个五日窗口',data:oldWindows,backgroundColor:oldColor,pointStyle:'circle',pointRadius:5},{label:'后篇：十日连续测量',data:[{x:94.2,y:0.74}],backgroundColor:newColor,pointStyle:'rectRot',pointRadius:8}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{min:0,max:100,title:{display:true,text:'Lu uptime（%）'},grid:{color:t.border}},y:{beginAtZero:true,title:{display:true,text:'HM 插值 / 外推不确定度（×10⁻¹⁶）'},grid:{color:t.border}}},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:10}},tooltip:{callbacks:{label:c=>c.dataset.label+': uptime '+c.raw.x+'%, u='+c.raw.y}}}}}));
+
+      function buildDataRows(targetId,items){const target=root.querySelector('#'+targetId),total=totalVariance(items);target.innerHTML=items.map(item=>'<div class="uc-data-row"><span>'+item.label+'</span><span class="uc-data-number">'+fmt(item.u)+' ×10⁻¹⁶</span><span class="uc-data-share">u²占比 '+(100*item.u*item.u/total).toFixed(1)+'%</span></div>').join('');}
+      buildDataRows('uc-old-data',oldItems);buildDataRows('uc-new-data',newItems);
+    })();
+  </script>
+</div>

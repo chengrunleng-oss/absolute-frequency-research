@@ -1,0 +1,1236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Lu+ 848 nm uncertainty comparison - interactive</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;max-width:736px;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="Lu+ 848 nm uncertainty comparison - interactive" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;Lu+ 848 nm uncertainty comparison - interactive&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(--background) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: light-dark(rgb(255 255 255), rgb(24 24 24));
+  --foreground: light-dark(rgb(26 28 31), rgb(255 255 255));
+  --card: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --card-foreground: var(--foreground);
+  --popover: light-dark(rgb(255 255 255), rgb(45 45 45));
+  --popover-foreground: var(--foreground);
+  --primary: light-dark(rgb(51 156 255), rgb(131 195 255));
+  --primary-foreground: light-dark(rgb(255 255 255), rgb(13 13 13));
+  --secondary: light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%));
+  --secondary-foreground: var(--foreground);
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: light-dark(
+    rgb(26 28 31 / 49.4%),
+    rgb(255 255 255 / 49.8%)
+  );
+  --accent: light-dark(rgb(229 242 255), rgb(13 39 63));
+  --accent-foreground: var(--primary);
+  --destructive: light-dark(rgb(226 85 7), rgb(255 133 73));
+  --border: light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%));
+  --input: light-dark(
+    rgb(26 28 31 / 11.8%),
+    color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+  );
+  --ring: light-dark(rgb(51 156 255), rgb(131 195 255 / 76%));
+  --font-size-base: 14px;
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --radius: 12.5px;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+  --color-background-primary: var(--background);
+  --color-text-primary: var(--foreground);
+  --color-border-secondary: var(--border);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--viz-font-weight-medium);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: superellipse(1.5);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget &gt; :not(.card) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: superellipse(1.5);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+    [aria-pressed=&quot;true&quot;],
+    [aria-selected=&quot;true&quot;],
+    .is-selected
+  ) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;lu-uncertainty-comparison-2607&quot;&gt;
+  &lt;style&gt;
+    #lu-uncertainty-comparison-2607 {
+      color-scheme: light;
+      --background: #FFFFFF;
+      --foreground: #20262D;
+      --card: #F3F5F7;
+      --card-foreground: #20262D;
+      --muted-foreground: #5F6B76;
+      --border: #D9DEE5;
+      --viz-series-1: #2D6A8A;
+      --viz-series-2: #C47B28;
+      --viz-series-3: #4E8B57;
+      --viz-series-4: #A84E62;
+      --viz-series-5: #7A5AA6;
+      --viz-series-6: #318C86;
+      color: var(--foreground);
+      background: var(--background);
+      width: 100%;
+      padding: 18px;
+      font-family: &quot;Microsoft YaHei&quot;, &quot;Segoe UI&quot;, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    #lu-uncertainty-comparison-2607 * { box-sizing: border-box; }
+    #lu-uncertainty-comparison-2607 .text-small { font-size: 12px; }
+    #lu-uncertainty-comparison-2607 .uc-title { padding: 2px 0 16px; }
+    #lu-uncertainty-comparison-2607 .uc-title h1 { margin: 0; font-size: 24px; font-weight: 500; line-height: 1.35; }
+    #lu-uncertainty-comparison-2607 .uc-title p { margin: 6px 0 0; color: var(--muted-foreground); }
+    #lu-uncertainty-comparison-2607 .uc-stack { display: grid; gap: 18px; }
+    #lu-uncertainty-comparison-2607 .uc-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    #lu-uncertainty-comparison-2607 .uc-metric {
+      display: flex;
+      flex-direction: column;
+      min-height: 128px;
+      padding: 18px 20px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #F8F9FB;
+      box-shadow: 0 1px 2px rgba(32, 38, 45, 0.06);
+      justify-content: space-between;
+    }
+    #lu-uncertainty-comparison-2607 .uc-metric-label { color: var(--muted-foreground); }
+    #lu-uncertainty-comparison-2607 .uc-metric-value {
+      display: flex;
+      align-items: baseline;
+      gap: 7px;
+      color: var(--foreground);
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+    #lu-uncertainty-comparison-2607 .uc-metric-unit { font-size: 17px; font-weight: 400; }
+    #lu-uncertainty-comparison-2607 .uc-metric-context { color: var(--muted-foreground); }
+    #lu-uncertainty-comparison-2607 .uc-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    #lu-uncertainty-comparison-2607 .uc-section { min-width: 0; }
+    #lu-uncertainty-comparison-2607 .uc-section &gt; h3 { margin: 0 0 10px; font-weight: 500; }
+    #lu-uncertainty-comparison-2607 .uc-chart { position: relative; width: 100%; height: 310px; }
+    #lu-uncertainty-comparison-2607 .uc-chart.uc-tall { height: 410px; }
+    #lu-uncertainty-comparison-2607 .uc-chart.uc-short { height: 270px; }
+    #lu-uncertainty-comparison-2607 .uc-chart canvas { width: 100% !important; height: 100% !important; }
+    #lu-uncertainty-comparison-2607 .uc-legend { display: grid; gap: 6px; margin-top: 10px; }
+    #lu-uncertainty-comparison-2607 .uc-legend-row { display: grid; grid-template-columns: 12px minmax(0, 1fr) auto auto; gap: 8px; align-items: center; }
+    #lu-uncertainty-comparison-2607 .uc-swatch { width: 10px; height: 10px; border-radius: 50%; }
+    #lu-uncertainty-comparison-2607 .uc-legend-value,
+    #lu-uncertainty-comparison-2607 .uc-legend-share { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    #lu-uncertainty-comparison-2607 .uc-legend-share { color: var(--muted-foreground); }
+    #lu-uncertainty-comparison-2607 .uc-note { color: var(--muted-foreground); margin: 7px 0 0; }
+    #lu-uncertainty-comparison-2607 .uc-formulas { display: grid; gap: 10px; }
+    #lu-uncertainty-comparison-2607 .uc-formula { padding: 10px 0; border-bottom: 1px solid var(--border); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+    #lu-uncertainty-comparison-2607 .uc-formula:last-child { border-bottom: 0; }
+    #lu-uncertainty-comparison-2607 .uc-formula code { white-space: normal; }
+    #lu-uncertainty-comparison-2607 .uc-step { display: grid; grid-template-columns: minmax(95px, .45fr) minmax(0, 1.55fr); gap: 10px; }
+    #lu-uncertainty-comparison-2607 .uc-step-label { color: var(--muted-foreground); }
+    #lu-uncertainty-comparison-2607 .uc-data { display: grid; gap: 5px; }
+    #lu-uncertainty-comparison-2607 .uc-data-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--border); }
+    #lu-uncertainty-comparison-2607 .uc-data-row:last-child { border-bottom: 0; }
+    #lu-uncertainty-comparison-2607 .uc-data-number { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    #lu-uncertainty-comparison-2607 .uc-data-share { color: var(--muted-foreground); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    #lu-uncertainty-comparison-2607 .uc-emphasis { font-weight: 500; }
+    #lu-uncertainty-comparison-2607 .uc-source { display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--muted-foreground); }
+    @media (max-width: 760px) {
+      #lu-uncertainty-comparison-2607 .uc-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #lu-uncertainty-comparison-2607 .uc-two { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 440px) {
+      #lu-uncertainty-comparison-2607 .uc-metrics { grid-template-columns: 1fr; }
+      #lu-uncertainty-comparison-2607 .uc-metric { min-height: 116px; }
+      #lu-uncertainty-comparison-2607 .uc-chart { height: 290px; }
+      #lu-uncertainty-comparison-2607 .uc-chart.uc-tall { height: 470px; }
+      #lu-uncertainty-comparison-2607 .uc-legend-row { grid-template-columns: 12px minmax(0, 1fr) auto; }
+      #lu-uncertainty-comparison-2607 .uc-legend-share { grid-column: 2 / 4; }
+      #lu-uncertainty-comparison-2607 .uc-step { grid-template-columns: 1fr; gap: 3px; }
+      #lu-uncertainty-comparison-2607 .uc-data-row { grid-template-columns: minmax(0, 1fr) auto; }
+      #lu-uncertainty-comparison-2607 .uc-data-share { grid-column: 1 / 3; }
+    }
+  &lt;/style&gt;
+
+  &lt;header class=&quot;uc-title&quot;&gt;
+    &lt;h1&gt;镥离子 848 nm 绝对频率测量不确定度对比&lt;/h1&gt;
+    &lt;p&gt;2025 年 TAI 溯源结果与 2026 年 PPP-AR 直比结果&lt;/p&gt;
+  &lt;/header&gt;
+
+  &lt;div class=&quot;uc-stack&quot;&gt;
+    &lt;div class=&quot;viz-grid uc-metrics&quot; aria-label=&quot;核心结果&quot;&gt;
+      &lt;div class=&quot;card viz-stat uc-metric&quot;&gt;&lt;div class=&quot;uc-metric-label&quot;&gt;前篇总不确定度&lt;/div&gt;&lt;div class=&quot;uc-metric-value&quot;&gt;&lt;span&gt;9.2&lt;/span&gt;&lt;span class=&quot;uc-metric-unit&quot;&gt;× 10&lt;sup&gt;−16&lt;/sup&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;uc-metric-context text-small&quot;&gt;TAI 链路 · 2025&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;card viz-stat uc-metric&quot;&gt;&lt;div class=&quot;uc-metric-label&quot;&gt;后篇总不确定度&lt;/div&gt;&lt;div class=&quot;uc-metric-value&quot;&gt;&lt;span&gt;2.57&lt;/span&gt;&lt;span class=&quot;uc-metric-unit&quot;&gt;× 10&lt;sup&gt;−16&lt;/sup&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;uc-metric-context text-small&quot;&gt;PPP-AR 直比 NRC-FCs2 · 2026&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;card viz-stat uc-metric&quot;&gt;&lt;div class=&quot;uc-metric-label&quot;&gt;不确定度改善&lt;/div&gt;&lt;div class=&quot;uc-metric-value&quot;&gt;&lt;span&gt;3.58&lt;/span&gt;&lt;span class=&quot;uc-metric-unit&quot;&gt;倍&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;uc-metric-context text-small&quot;&gt;9.2 ÷ 2.57&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;card viz-stat uc-metric&quot;&gt;&lt;div class=&quot;uc-metric-label&quot;&gt;总方差降低&lt;/div&gt;&lt;div class=&quot;uc-metric-value&quot;&gt;&lt;span&gt;92.3%&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;uc-metric-context text-small&quot;&gt;1 − (2.57 ÷ 9.2)²&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;uc-two&quot;&gt;
+      &lt;section class=&quot;uc-section&quot; aria-labelledby=&quot;uc-old-pie-title&quot;&gt;&lt;h3 id=&quot;uc-old-pie-title&quot;&gt;前篇：各项方差占比&lt;/h3&gt;&lt;div class=&quot;uc-chart&quot;&gt;&lt;canvas id=&quot;uc-old-pie&quot; role=&quot;img&quot; aria-label=&quot;前篇不确定度预算的方差占比环形图&quot;&gt;&lt;/canvas&gt;&lt;/div&gt;&lt;div id=&quot;uc-old-legend&quot; class=&quot;uc-legend text-small&quot;&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;uc-section&quot; aria-labelledby=&quot;uc-new-pie-title&quot;&gt;&lt;h3 id=&quot;uc-new-pie-title&quot;&gt;后篇：各项方差占比&lt;/h3&gt;&lt;div class=&quot;uc-chart&quot;&gt;&lt;canvas id=&quot;uc-new-pie&quot; role=&quot;img&quot; aria-label=&quot;后篇不确定度预算的方差占比环形图&quot;&gt;&lt;/canvas&gt;&lt;/div&gt;&lt;div id=&quot;uc-new-legend&quot; class=&quot;uc-legend text-small&quot;&gt;&lt;/div&gt;&lt;/section&gt;
+    &lt;/div&gt;
+
+    &lt;section class=&quot;uc-section&quot; aria-labelledby=&quot;uc-compare-title&quot;&gt;
+      &lt;h3 id=&quot;uc-compare-title&quot;&gt;关键指标同尺度比较&lt;/h3&gt;
+      &lt;div class=&quot;uc-chart uc-tall&quot;&gt;&lt;canvas id=&quot;uc-compare&quot; role=&quot;img&quot; aria-label=&quot;前后两篇关键不确定度指标的横向柱状对比图&quot;&gt;&lt;/canvas&gt;&lt;/div&gt;
+      &lt;p class=&quot;uc-note text-small&quot;&gt;单位均为 10&lt;sup&gt;−16&lt;/sup&gt;；“远程时间链路”把前篇 HM/UTC、UTC/TAI、TAI 插值与 TAI/SI 统计项合并，后篇把 PPP-AR 与 RF 分配合并。&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;uc-section&quot; aria-labelledby=&quot;uc-share-title&quot;&gt;
+      &lt;h3 id=&quot;uc-share-title&quot;&gt;总方差由谁主导：统一以前篇总方差为 100%&lt;/h3&gt;
+      &lt;div class=&quot;uc-chart uc-short&quot;&gt;&lt;canvas id=&quot;uc-share&quot; role=&quot;img&quot; aria-label=&quot;以前篇总方差为百分之百标尺的前后两篇功能组方差堆叠图&quot;&gt;&lt;/canvas&gt;&lt;/div&gt;
+      &lt;p class=&quot;uc-note text-small&quot;&gt;前篇总方差 85.11 定义为 100%；后篇总方差 6.58 只相当于前篇的 7.73%，不再把后篇单独归一化到 100%。&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;uc-section&quot; aria-labelledby=&quot;uc-waterfall-title&quot;&gt;
+      &lt;h3 id=&quot;uc-waterfall-title&quot;&gt;各功能组的方差前后对比&lt;/h3&gt;
+      &lt;div class=&quot;uc-chart&quot;&gt;&lt;canvas id=&quot;uc-waterfall&quot; role=&quot;img&quot; aria-label=&quot;Lu本地、氢钟、远程链路和SI参考四个功能组的前后绝对方差对比图&quot;&gt;&lt;/canvas&gt;&lt;/div&gt;
+      &lt;p class=&quot;uc-note text-small&quot;&gt;净变化：HM −47.73，远程链路 −34.48，Lu 本地 −0.05，SI 参考 +3.73；因此 85.11 − 78.54 = 6.58。单位均为 (10&lt;sup&gt;−16&lt;/sup&gt;)²。&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;uc-section&quot; aria-labelledby=&quot;uc-uptime-title&quot;&gt;
+      &lt;h3 id=&quot;uc-uptime-title&quot;&gt;Lu 运行占空比与 HM 插值/外推不确定度&lt;/h3&gt;
+      &lt;div class=&quot;uc-chart&quot;&gt;&lt;canvas id=&quot;uc-uptime&quot; role=&quot;img&quot; aria-label=&quot;九个五日窗口和新论文十日测量的占空比与氢钟插值外推不确定度散点图&quot;&gt;&lt;/canvas&gt;&lt;/div&gt;
+      &lt;p class=&quot;uc-note text-small&quot;&gt;前篇 9 个五日窗口的 Lu uptime 为 2%–37%，对应 HM interpolation 6.8–29；后篇连续十日达到 94.2%，HM extrapolation 降至 0.74。单位：10&lt;sup&gt;−16&lt;/sup&gt;。&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;div class=&quot;uc-two&quot;&gt;
+      &lt;section class=&quot;uc-section&quot; aria-labelledby=&quot;uc-old-formula-title&quot;&gt;
+        &lt;h3 id=&quot;uc-old-formula-title&quot;&gt;前篇完整合成公式&lt;/h3&gt;
+        &lt;div class=&quot;card uc-formulas&quot;&gt;
+          &lt;div class=&quot;uc-formula uc-step&quot;&gt;&lt;span class=&quot;uc-step-label&quot;&gt;九次结果权重&lt;/span&gt;&lt;code&gt;a&lt;sub&gt;j&lt;/sub&gt; = (1/u&lt;sub&gt;j&lt;/sub&gt;²) / Σ&lt;sub&gt;i&lt;/sub&gt;(1/u&lt;sub&gt;i&lt;/sub&gt;²)&lt;/code&gt;&lt;/div&gt;
+          &lt;div class=&quot;uc-formula uc-step&quot;&gt;&lt;span class=&quot;uc-step-label&quot;&gt;分量有效值&lt;/span&gt;&lt;code&gt;u&lt;sub&gt;k,eff&lt;/sub&gt; = √[Σ&lt;sub&gt;j&lt;/sub&gt;(a&lt;sub&gt;j&lt;/sub&gt;u&lt;sub&gt;k,j&lt;/sub&gt;)²]&lt;/code&gt;&lt;/div&gt;
+          &lt;div class=&quot;uc-formula uc-step&quot;&gt;&lt;span class=&quot;uc-step-label&quot;&gt;Lu/TAI&lt;/span&gt;&lt;code&gt;√(0.124² + 4.391² + 5.292² + 2.328²) = 7.25 ≈ 7.3&lt;/code&gt;&lt;/div&gt;
+          &lt;div class=&quot;uc-formula uc-step&quot;&gt;&lt;span class=&quot;uc-step-label&quot;&gt;统计合成&lt;/span&gt;&lt;code&gt;u&lt;sub&gt;A&lt;/sub&gt; = √(7.253² + 1.5² + 0.4²) = 7.42 ≈ 7.4&lt;/code&gt;&lt;/div&gt;
+          &lt;div class=&quot;uc-formula uc-step&quot;&gt;&lt;span class=&quot;uc-step-label&quot;&gt;系统合成&lt;/span&gt;&lt;code&gt;u&lt;sub&gt;B&lt;/sub&gt; = √(2.0² + 5.0² + 0.1² + 0.4² + 0.9²) = 5.48 ≈ 5.5&lt;/code&gt;&lt;/div&gt;
+          &lt;div class=&quot;uc-formula uc-step uc-emphasis&quot;&gt;&lt;span class=&quot;uc-step-label&quot;&gt;最终结果&lt;/span&gt;&lt;code&gt;u&lt;sub&gt;old&lt;/sub&gt; = √(7.4² + 5.5²) = 9.22 ≈ 9.2&lt;/code&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+      &lt;section class=&quot;uc-section&quot; aria-labelledby=&quot;uc-new-formula-title&quot;&gt;
+        &lt;h3 id=&quot;uc-new-formula-title&quot;&gt;后篇完整合成公式&lt;/h3&gt;
+        &lt;div class=&quot;card uc-formulas&quot;&gt;
+          &lt;div class=&quot;uc-formula uc-step&quot;&gt;&lt;span class=&quot;uc-step-label&quot;&gt;统计项&lt;/span&gt;&lt;code&gt;u&lt;sub&gt;A&lt;/sub&gt; = √(0.04² + 0.74² + 0.01² + 1.00² + 0.60² + 1.78²)&lt;/code&gt;&lt;/div&gt;
+          &lt;div class=&quot;uc-formula uc-step&quot;&gt;&lt;span class=&quot;uc-step-label&quot;&gt;统计结果&lt;/span&gt;&lt;code&gt;u&lt;sub&gt;A&lt;/sub&gt; = √5.0777 = 2.253；论文用未舍入数据报告 2.26&lt;/code&gt;&lt;/div&gt;
+          &lt;div class=&quot;uc-formula uc-step&quot;&gt;&lt;span class=&quot;uc-step-label&quot;&gt;系统项&lt;/span&gt;&lt;code&gt;u&lt;sub&gt;B&lt;/sub&gt; = √(0.36² + 1.17²) = √1.4985 = 1.224 ≈ 1.22&lt;/code&gt;&lt;/div&gt;
+          &lt;div class=&quot;uc-formula uc-step uc-emphasis&quot;&gt;&lt;span class=&quot;uc-step-label&quot;&gt;最终结果&lt;/span&gt;&lt;code&gt;u&lt;sub&gt;new&lt;/sub&gt; = √(2.26² + 1.22²) = 2.57 ≈ 2.6&lt;/code&gt;&lt;/div&gt;
+          &lt;div class=&quot;uc-formula uc-step&quot;&gt;&lt;span class=&quot;uc-step-label&quot;&gt;改善倍数&lt;/span&gt;&lt;code&gt;u&lt;sub&gt;old&lt;/sub&gt;/u&lt;sub&gt;new&lt;/sub&gt; = 9.2/2.57 = 3.58&lt;/code&gt;&lt;/div&gt;
+          &lt;div class=&quot;uc-formula uc-step&quot;&gt;&lt;span class=&quot;uc-step-label&quot;&gt;方差降幅&lt;/span&gt;&lt;code&gt;1 − (2.57/9.2)² = 92.3%&lt;/code&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;uc-two&quot;&gt;
+      &lt;section class=&quot;uc-section&quot; aria-labelledby=&quot;uc-old-data-title&quot;&gt;&lt;h3 id=&quot;uc-old-data-title&quot;&gt;前篇预算明细&lt;/h3&gt;&lt;div id=&quot;uc-old-data&quot; class=&quot;uc-data text-small&quot; aria-label=&quot;前篇预算明细，单位10的负16次方&quot;&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;uc-section&quot; aria-labelledby=&quot;uc-new-data-title&quot;&gt;&lt;h3 id=&quot;uc-new-data-title&quot;&gt;后篇预算明细&lt;/h3&gt;&lt;div id=&quot;uc-new-data&quot; class=&quot;uc-data text-small&quot; aria-label=&quot;后篇预算明细，单位10的负16次方&quot;&gt;&lt;/div&gt;&lt;/section&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;uc-source text-small&quot;&gt;&lt;span&gt;前篇：2502.10004v3，Table 2–3&lt;/span&gt;&lt;span&gt;后篇：2607.07044v1，Table 4&lt;/span&gt;&lt;span&gt;饼图与百分比均按方差 u² 计算&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js&quot;&gt;&lt;/script&gt;
+  &lt;script&gt;
+    (() =&gt; {
+      const root = document.getElementById(&#x27;lu-uncertainty-comparison-2607&#x27;);
+      if (!root || typeof Chart === &#x27;undefined&#x27;) return;
+      const oldItems = [
+        {label:&#x27;Lu 统计（加权后）&#x27;,u:0.124,group:0,color:&#x27;#2D6A8A&#x27;},
+        {label:&#x27;HM interpolation（加权后）&#x27;,u:4.391,group:1,color:&#x27;#C47B28&#x27;},
+        {label:&#x27;HM / UTC(USNO)&#x27;,u:5.292,group:2,color:&#x27;#4E8B57&#x27;},
+        {label:&#x27;UTC(USNO) / TAI&#x27;,u:2.328,group:2,color:&#x27;#A84E62&#x27;},
+        {label:&#x27;TAI interpolation&#x27;,u:1.50,group:2,color:&#x27;#7A5AA6&#x27;},
+        {label:&#x27;TAI / SI 统计&#x27;,u:0.40,group:2,color:&#x27;#318C86&#x27;},
+        {label:&#x27;HM drift&#x27;,u:2.00,group:1,color:&#x27;#C49A2D&#x27;},
+        {label:&#x27;HM diurnal&#x27;,u:5.00,group:1,color:&#x27;#D06B87&#x27;},
+        {label:&#x27;Lu 系统&#x27;,u:0.10,group:0,color:&#x27;#4F63A8&#x27;},
+        {label:&#x27;重力红移&#x27;,u:0.40,group:0,color:&#x27;#7D8F3B&#x27;},
+        {label:&#x27;PSFS 系统&#x27;,u:0.90,group:3,color:&#x27;#9A6840&#x27;}
+      ];
+      const newItems = [
+        {label:&#x27;Lu 统计&#x27;,u:0.04,group:0,color:&#x27;#2D6A8A&#x27;},
+        {label:&#x27;HM extrapolation&#x27;,u:0.74,group:1,color:&#x27;#C47B28&#x27;},
+        {label:&#x27;HM drift&#x27;,u:0.01,group:1,color:&#x27;#C49A2D&#x27;},
+        {label:&#x27;PPP-AR 链路&#x27;,u:1.00,group:2,color:&#x27;#4E8B57&#x27;},
+        {label:&#x27;NRC RF 分配&#x27;,u:0.60,group:2,color:&#x27;#318C86&#x27;},
+        {label:&#x27;NRC-FCs2 统计&#x27;,u:1.78,group:3,color:&#x27;#7A5AA6&#x27;},
+        {label:&#x27;Lu 系统＋重力红移&#x27;,u:0.36,group:0,color:&#x27;#4F63A8&#x27;},
+        {label:&#x27;NRC-FCs2 系统&#x27;,u:1.17,group:3,color:&#x27;#A84E62&#x27;}
+      ];
+      const charts=[];
+      const theme=()=&gt;{const s=getComputedStyle(root);return{fg:s.getPropertyValue(&#x27;--foreground&#x27;).trim(),muted:s.getPropertyValue(&#x27;--muted-foreground&#x27;).trim(),border:s.getPropertyValue(&#x27;--border&#x27;).trim(),bg:s.getPropertyValue(&#x27;--background&#x27;).trim(),series:[1,2,3,4,5,6].map(i=&gt;s.getPropertyValue(&#x27;--viz-series-&#x27;+i).trim()),font:s.fontFamily};};
+      let t=theme();
+      const oldColor=&#x27;#687481&#x27;;
+      const newColor=&#x27;#25739A&#x27;;
+      const totalVariance=items=&gt;items.reduce((sum,d)=&gt;sum+d.u*d.u,0);
+      const fmt=value=&gt;value.toFixed(2);
+      const groupColors=()=&gt;[t.series[0],t.series[1],t.series[2],t.series[3]];
+      Chart.defaults.color=t.muted;Chart.defaults.borderColor=t.border;Chart.defaults.font.family=t.font;Chart.defaults.animation=false;
+
+      function buildLegend(targetId,items){
+        const target=root.querySelector(&#x27;#&#x27;+targetId),total=totalVariance(items);
+        target.innerHTML=items.map(item=&gt;&#x27;&lt;div class=&quot;uc-legend-row&quot;&gt;&lt;span class=&quot;uc-swatch&quot; style=&quot;background:&#x27;+item.color+&#x27;&quot;&gt;&lt;/span&gt;&lt;span&gt;&#x27;+item.label+&#x27;&lt;/span&gt;&lt;span class=&quot;uc-legend-value&quot;&gt;&#x27;+fmt(item.u)+&#x27;&lt;/span&gt;&lt;span class=&quot;uc-legend-share&quot;&gt;&#x27;+(100*item.u*item.u/total).toFixed(1)+&#x27;%&lt;/span&gt;&lt;/div&gt;&#x27;).join(&#x27;&#x27;);
+      }
+      function makeDoughnut(id,items,centerText){
+        const total=totalVariance(items);
+        const centerPlugin={id:&#x27;center-&#x27;+id,afterDraw(chart){const area=chart.chartArea;if(!area)return;const ctx=chart.ctx;ctx.save();ctx.fillStyle=t.fg;ctx.textAlign=&#x27;center&#x27;;ctx.textBaseline=&#x27;middle&#x27;;ctx.font=&#x27;500 18px &#x27;+t.font;ctx.fillText(centerText,(area.left+area.right)/2,(area.top+area.bottom)/2-7);ctx.fillStyle=t.muted;ctx.font=&#x27;400 12px &#x27;+t.font;ctx.fillText(&#x27;× 10⁻¹⁶&#x27;,(area.left+area.right)/2,(area.top+area.bottom)/2+14);ctx.restore();}};
+        charts.push(new Chart(root.querySelector(&#x27;#&#x27;+id),{type:&#x27;doughnut&#x27;,data:{labels:items.map(d=&gt;d.label),datasets:[{data:items.map(d=&gt;d.u*d.u),backgroundColor:items.map(d=&gt;d.color),borderColor:t.bg,borderWidth:2,hoverOffset:3}]},options:{responsive:true,maintainAspectRatio:false,cutout:&#x27;62%&#x27;,plugins:{legend:{display:false},tooltip:{callbacks:{label(ctx){const item=items[ctx.dataIndex];return item.label+&#x27;: u=&#x27;+fmt(item.u)+&#x27;, 方差占比=&#x27;+(100*item.u*item.u/total).toFixed(1)+&#x27;%&#x27;;}}}}},plugins:[centerPlugin]}));
+      }
+      makeDoughnut(&#x27;uc-old-pie&#x27;,oldItems,&#x27;9.22&#x27;);makeDoughnut(&#x27;uc-new-pie&#x27;,newItems,&#x27;2.57&#x27;);buildLegend(&#x27;uc-old-legend&#x27;,oldItems);buildLegend(&#x27;uc-new-legend&#x27;,newItems);
+
+      charts.push(new Chart(root.querySelector(&#x27;#uc-compare&#x27;),{type:&#x27;bar&#x27;,data:{labels:[&#x27;总不确定度&#x27;,&#x27;统计不确定度&#x27;,&#x27;系统不确定度&#x27;,&#x27;HM 插值 / 外推&#x27;,&#x27;远程时间链路&#x27;,&#x27;HM drift&#x27;,&#x27;HM diurnal&#x27;,&#x27;Lu 本地系统&#x27;,&#x27;SI 参考系统&#x27;],datasets:[{label:&#x27;前篇&#x27;,data:[9.22,7.40,5.50,4.39,5.99,2.00,5.00,0.43,0.90],backgroundColor:oldColor},{label:&#x27;后篇&#x27;,data:[2.57,2.26,1.22,0.74,1.17,0.01,0.00,0.36,1.17],backgroundColor:newColor}]},options:{indexAxis:&#x27;y&#x27;,responsive:true,maintainAspectRatio:false,scales:{x:{beginAtZero:true,title:{display:true,text:&#x27;不确定度 u（×10⁻¹⁶）&#x27;},grid:{color:t.border}},y:{grid:{display:false}}},plugins:{legend:{position:&#x27;bottom&#x27;,labels:{usePointStyle:true,boxWidth:10}},tooltip:{callbacks:{label:c=&gt;c.dataset.label+&#x27;: &#x27;+c.raw.toFixed(2)+&#x27; ×10⁻¹⁶&#x27;}}}}}));
+
+      const oldGroups=[0.1854027015,48.2811613544,35.8359819485,0.81],newGroups=[0.1312,0.5477,1.36,4.5373],groupLabels=[&#x27;Lu 本地&#x27;,&#x27;HM flywheel&#x27;,&#x27;远程链路&#x27;,&#x27;SI 参考&#x27;];
+      const totals=[oldGroups.reduce((a,b)=&gt;a+b,0),newGroups.reduce((a,b)=&gt;a+b,0)];
+      const baselineShare=[100,100*totals[1]/totals[0]];
+      charts.push(new Chart(root.querySelector(&#x27;#uc-share&#x27;),{type:&#x27;bar&#x27;,data:{labels:[&#x27;前篇&#x27;,&#x27;后篇&#x27;],datasets:groupLabels.map((label,i)=&gt;({label,data:[100*oldGroups[i]/totals[0],100*newGroups[i]/totals[0]],backgroundColor:groupColors()[i]}))},options:{indexAxis:&#x27;y&#x27;,responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true,min:0,max:105,title:{display:true,text:&#x27;相对前篇总方差（前篇 = 100%）&#x27;},grid:{color:t.border},ticks:{callback:v=&gt;v&lt;=100?v+&#x27;%&#x27;:&#x27;&#x27;}},y:{stacked:true,grid:{display:false}}},plugins:{legend:{position:&#x27;bottom&#x27;,labels:{usePointStyle:true,boxWidth:10}},tooltip:{callbacks:{label:c=&gt;{const variance=c.dataIndex===0?oldGroups[c.datasetIndex]:newGroups[c.datasetIndex];return c.dataset.label+&#x27;: 方差 &#x27;+variance.toFixed(2)+&#x27;，相当前篇总方差 &#x27;+c.raw.toFixed(2)+&#x27;%&#x27;;}}}}},plugins:[{id:&#x27;baseline-total-labels&#x27;,afterDatasetsDraw(chart){const ctx=chart.ctx,last=chart.getDatasetMeta(chart.data.datasets.length-1);ctx.save();ctx.fillStyle=t.fg;ctx.textBaseline=&#x27;middle&#x27;;ctx.font=&#x27;500 11px &#x27;+t.font;last.data.forEach((bar,i)=&gt;{const atRight=baselineShare[i]&gt;95;ctx.textAlign=atRight?&#x27;right&#x27;:&#x27;left&#x27;;ctx.fillText(baselineShare[i].toFixed(i===0?0:2)+&#x27;%&#x27;,atRight?chart.chartArea.right-4:bar.x+8,bar.y);});ctx.restore();}}]}));
+
+      const varianceDeltas=newGroups.map((value,i)=&gt;value-oldGroups[i]);
+      charts.push(new Chart(root.querySelector(&#x27;#uc-waterfall&#x27;),{type:&#x27;bar&#x27;,data:{labels:groupLabels,datasets:[{label:&#x27;前篇&#x27;,data:oldGroups,backgroundColor:oldColor},{label:&#x27;后篇&#x27;,data:newGroups,backgroundColor:newColor}]},options:{indexAxis:&#x27;y&#x27;,responsive:true,maintainAspectRatio:false,scales:{x:{beginAtZero:true,max:55,title:{display:true,text:&#x27;方差 u²［(10⁻¹⁶)²］&#x27;},grid:{color:t.border}},y:{grid:{display:false}}},plugins:{legend:{position:&#x27;bottom&#x27;,labels:{usePointStyle:true,boxWidth:10}},tooltip:{callbacks:{label:c=&gt;c.dataset.label+&#x27;: &#x27;+c.raw.toFixed(2),afterBody:items=&gt;&#x27;变化量 Δ = &#x27;+varianceDeltas[items[0].dataIndex].toFixed(2)}}}},plugins:[{id:&#x27;variance-delta-labels&#x27;,afterDatasetsDraw(chart){const ctx=chart.ctx,scale=chart.scales.x;ctx.save();ctx.fillStyle=t.fg;ctx.textAlign=&#x27;left&#x27;;ctx.textBaseline=&#x27;middle&#x27;;ctx.font=&#x27;500 11px &#x27;+t.font;groupLabels.forEach((label,i)=&gt;{const y=(chart.getDatasetMeta(0).data[i].y+chart.getDatasetMeta(1).data[i].y)/2;const x=scale.getPixelForValue(Math.max(oldGroups[i],newGroups[i]))+8;const delta=varianceDeltas[i];ctx.fillText(&#x27;Δ &#x27;+(delta&gt;=0?&#x27;+&#x27;:&#x27;&#x27;)+delta.toFixed(2),x,y);});ctx.restore();}}]}));
+
+      const oldWindows=[{x:11,y:15},{x:2,y:29},{x:7,y:16},{x:37,y:6.8},{x:14,y:14},{x:9,y:18},{x:3,y:24},{x:30,y:7.6},{x:20,y:8.8}];
+      charts.push(new Chart(root.querySelector(&#x27;#uc-uptime&#x27;),{type:&#x27;scatter&#x27;,data:{datasets:[{label:&#x27;前篇：9 个五日窗口&#x27;,data:oldWindows,backgroundColor:oldColor,pointStyle:&#x27;circle&#x27;,pointRadius:5},{label:&#x27;后篇：十日连续测量&#x27;,data:[{x:94.2,y:0.74}],backgroundColor:newColor,pointStyle:&#x27;rectRot&#x27;,pointRadius:8}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{min:0,max:100,title:{display:true,text:&#x27;Lu uptime（%）&#x27;},grid:{color:t.border}},y:{beginAtZero:true,title:{display:true,text:&#x27;HM 插值 / 外推不确定度（×10⁻¹⁶）&#x27;},grid:{color:t.border}}},plugins:{legend:{position:&#x27;bottom&#x27;,labels:{usePointStyle:true,boxWidth:10}},tooltip:{callbacks:{label:c=&gt;c.dataset.label+&#x27;: uptime &#x27;+c.raw.x+&#x27;%, u=&#x27;+c.raw.y}}}}}));
+
+      function buildDataRows(targetId,items){const target=root.querySelector(&#x27;#&#x27;+targetId),total=totalVariance(items);target.innerHTML=items.map(item=&gt;&#x27;&lt;div class=&quot;uc-data-row&quot;&gt;&lt;span&gt;&#x27;+item.label+&#x27;&lt;/span&gt;&lt;span class=&quot;uc-data-number&quot;&gt;&#x27;+fmt(item.u)+&#x27; ×10⁻¹⁶&lt;/span&gt;&lt;span class=&quot;uc-data-share&quot;&gt;u²占比 &#x27;+(100*item.u*item.u/total).toFixed(1)+&#x27;%&lt;/span&gt;&lt;/div&gt;&#x27;).join(&#x27;&#x27;);}
+      buildDataRows(&#x27;uc-old-data&#x27;,oldItems);buildDataRows(&#x27;uc-new-data&#x27;,newItems);
+    })();
+  &lt;/script&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =&gt;
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest(&quot;[data-tooltip]&quot;)
+      : null;
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
+    document.removeEventListener(&quot;pointerout&quot;, handleLeave);
+    document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
+    document.removeEventListener(&quot;focusout&quot;, handleLeave);
+    document.removeEventListener(&quot;keydown&quot;, handleKeyDown);
+    document.removeEventListener(&quot;contextmenu&quot;, handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
+  document.addEventListener(&quot;pointerout&quot;, handleLeave);
+  document.addEventListener(&quot;focusin&quot;, handleFocusIn);
+  document.addEventListener(&quot;focusout&quot;, handleLeave);
+  document.addEventListener(&quot;keydown&quot;, handleKeyDown);
+  document.addEventListener(&quot;contextmenu&quot;, handleContextMenu);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+</body>
+</html>

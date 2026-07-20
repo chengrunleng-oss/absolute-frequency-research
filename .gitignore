@@ -1,2 +1,5 @@
 .codex_tmp/
-
+tmp/
+output/
+__pycache__/
+*.pyc

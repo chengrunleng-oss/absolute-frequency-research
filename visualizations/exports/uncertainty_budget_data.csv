@@ -1,0 +1,20 @@
+﻿paper,component,functional_group,u_x_1e-16,variance,variance_share_percent
+2025_old,Lu 统计（加权后）,Lu 本地,0.124,0.015376,0.018066
+2025_old,HM interpolation（加权后）,HM flywheel,4.391,19.280881,22.653778
+2025_old,HM / UTC(USNO),远程链路,5.292,28.005264,32.904360
+2025_old,UTC(USNO) / TAI,远程链路,2.328,5.419584,6.367658
+2025_old,TAI interpolation,远程链路,1.5,2.25,2.643603
+2025_old,TAI / SI 统计,远程链路,0.4,0.16,0.187990
+2025_old,HM drift,HM flywheel,2,4,4.699739
+2025_old,HM diurnal,HM flywheel,5,25,29.373370
+2025_old,Lu 系统,Lu 本地,0.1,0.01,0.011749
+2025_old,重力红移,Lu 本地,0.4,0.16,0.187990
+2025_old,PSFS 系统,SI 参考,0.9,0.81,0.951697
+2026_new,Lu 统计,Lu 本地,0.04,0.0016,0.024330
+2026_new,HM extrapolation,HM flywheel,0.74,0.5476,8.326997
+2026_new,HM drift,HM flywheel,0.01,0.0001,0.001521
+2026_new,PPP-AR 链路,远程链路,1,1,15.206350
+2026_new,NRC RF 分配,远程链路,0.6,0.36,5.474286
+2026_new,NRC-FCs2 统计,SI 参考,1.78,3.1684,48.179800
+2026_new,Lu 系统＋重力红移,Lu 本地,0.36,0.1296,1.970743
+2026_new,NRC-FCs2 系统,SI 参考,1.17,1.3689,20.815973

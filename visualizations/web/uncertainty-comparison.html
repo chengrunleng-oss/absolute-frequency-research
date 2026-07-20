@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lu+ 848 nm 绝对频率不确定度比较</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --background: #f7f8fa;
+      --surface: #ffffff;
+      --foreground: #20262d;
+      --muted: #5f6b76;
+      --border: #d9dee5;
+      --accent: #25739a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--foreground);
+      font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    header > div,
+    main,
+    footer {
+      width: min(1400px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+    header > div { padding: 22px 0 18px; }
+    h1 { margin: 0; font-size: 24px; font-weight: 500; }
+    header p { margin: 7px 0 0; color: var(--muted); }
+    main { padding: 24px 0 36px; }
+    h2 { margin: 0 0 12px; font-size: 18px; font-weight: 500; }
+    section + section { margin-top: 30px; }
+    .summary-image,
+    figure {
+      margin: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .summary-image { display: block; padding: 10px; }
+    .summary-image img,
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    figure { padding: 10px; min-width: 0; }
+    figcaption { padding: 9px 4px 2px; color: var(--muted); font-size: 13px; }
+    .files {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .files a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+    }
+    footer { padding: 0 0 30px; color: var(--muted); font-size: 13px; }
+    @media (max-width: 760px) {
+      header > div,
+      main,
+      footer { width: min(100% - 20px, 1400px); }
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Lu+ 848 nm 绝对频率不确定度比较</h1>
+      <p>2502.10004v3 与 2607.07044v1；所有图片均保存在本地。</p>
+    </div>
+  </header>
+
+  <main>
+    <section aria-labelledby="overview-title">
+      <h2 id="overview-title">总览</h2>
+      <a class="summary-image" href="../exports/uncertainty_comparison_all.png">
+        <img src="../exports/uncertainty_comparison_all.png" alt="两篇论文不确定度预算的完整统计比较总览">
+      </a>
+    </section>
+
+    <section aria-labelledby="charts-title">
+      <h2 id="charts-title">分项图</h2>
+      <div class="grid">
+        <figure><a href="../exports/01_old_uncertainty_pie.png"><img src="../exports/01_old_uncertainty_pie.png" alt="前篇各项不确定度方差占比饼图"></a><figcaption>前篇各项方差占比</figcaption></figure>
+        <figure><a href="../exports/02_new_uncertainty_pie.png"><img src="../exports/02_new_uncertainty_pie.png" alt="后篇各项不确定度方差占比饼图"></a><figcaption>后篇各项方差占比</figcaption></figure>
+        <figure><a href="../exports/03_metric_comparison.png"><img src="../exports/03_metric_comparison.png" alt="两篇论文关键不确定度指标的横向比较图"></a><figcaption>关键指标同尺度比较</figcaption></figure>
+        <figure><a href="../exports/04_variance_share.png"><img src="../exports/04_variance_share.png" alt="两篇论文各功能组总方差占比图"></a><figcaption>总方差主导项变化</figcaption></figure>
+        <figure><a href="../exports/05_variance_waterfall.png"><img src="../exports/05_variance_waterfall.png" alt="总方差下降来源的瀑布图"></a><figcaption>方差降低来源</figcaption></figure>
+        <figure><a href="../exports/06_uptime_vs_hm.png"><img src="../exports/06_uptime_vs_hm.png" alt="Lu光钟占空比和氢钟插值外推不确定度关系图"></a><figcaption>占空比与 HM 插值／外推</figcaption></figure>
+      </div>
+    </section>
+
+    <section aria-labelledby="formula-title">
+      <h2 id="formula-title">公式与完整预算</h2>
+      <figure><a href="../exports/07_formula_and_full_budget.png"><img src="../exports/07_formula_and_full_budget.png" alt="两篇论文不确定度合成公式和完整预算数据"></a><figcaption>合成公式、预算分量与方差占比</figcaption></figure>
+    </section>
+
+    <section aria-labelledby="files-title">
+      <h2 id="files-title">数据与生成代码</h2>
+      <div class="files">
+        <a href="uncertainty-comparison-interactive.html">原始 Chart.js 交互版</a>
+        <a href="../exports/uncertainty_budget_data.csv">完整预算 CSV</a>
+        <a href="../src/generate_uncertainty_charts.py">Python 生成脚本</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>图片单位统一为 10^-16；饼图和占比均按方差 u² 计算。</footer>
+</body>
+</html>
